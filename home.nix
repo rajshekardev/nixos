@@ -37,9 +37,9 @@ in
         		    '';
 
       shellAliases = {
-        build-nix = "sudo nixos-rebuild switch --flake ~/.nixdots#nixos";
+        build-nix = "sudo nixos-rebuild switch --flake ~/nixos#nixos";
         arch = "distrobox enter arch";
-        dots = "cd ~/.nixdots";
+        dots = "cd ~/nixos";
       };
     };
 
