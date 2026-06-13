@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }: 
 
 let
-  dotfiles = "${config.home.homeDirectory}/.nixdots/config";
+  dotfiles = "${config.home.homeDirectory}/nixos/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = {
     niri = "niri";
@@ -45,10 +45,11 @@ in
 			name = "Raj Shekar S";
 			email = "rajshekarwork@gmail.com";
 			};
+			init = {
+			defaultBranch = "main";
+			};
 		  };
-		  extraConfig = {
-			init.defaultBranch = "main";
-		  };
+
 		};
 
 		gh.enable = true;
