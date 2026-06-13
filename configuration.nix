@@ -44,7 +44,7 @@
 
   programs = {
 	niri.enable = true;
-
+  zsh.enable = true;
   };
 
   security = {
@@ -58,6 +58,7 @@
 
   users.users."rshekar" = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     description = "Raj Shekar";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
