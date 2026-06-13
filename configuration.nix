@@ -1,10 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ 
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -32,13 +36,13 @@
   };
 
   services.xserver = {
-	enable = true;
-	autoRepeatDelay = 200;
-	autoRepeatInterval = 35;
-	xkb = {
-	  layout = "us";
-	  variant = "";
-	};
+    enable = true;
+    autoRepeatDelay = 200;
+    autoRepeatInterval = 35;
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
   };
   services.displayManager.ly.enable = true;
 
@@ -92,39 +96,43 @@
         openssl
         glib
       ];
-    };  
+    };
   };
 
   security = {
     polkit.enable = true;
-    pam.services.swaylock = {}; 
+    pam.services.swaylock = { };
   };
 
   services = {
     gnome.gnome-keyring.enable = true;
     power-profiles-daemon.enable = true;
     logind.settings.Login = {
-        HandleLidSwitch = "ignore";
-      };
-      gvfs.enable = true;
-      udisks2.enable = true;
-      blueman.enable = true;
+      HandleLidSwitch = "ignore";
+    };
+    gvfs.enable = true;
+    udisks2.enable = true;
+    blueman.enable = true;
   };
 
-    nixpkgs.config.allowUnfreePredicate =
-      pkg:
-      builtins.elem (lib.getName pkg) [
-        "google-chrome"
-        "obsidian"
-        "steam"
-        "steam-unwrapped"
-      ];
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "google-chrome"
+      "obsidian"
+      "steam"
+      "steam-unwrapped"
+    ];
 
   users.users."rshekar" = {
     isNormalUser = true;
     shell = pkgs.zsh;
     description = "Raj Shekar";
-    extraGroups = [ "networkmanager" "wheel" "kvm" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "kvm"
+    ];
     packages = with pkgs; [
       tree
       zsh
@@ -163,7 +171,7 @@
     "ip_tables"
     "iptable_nat"
   ];
-	
+
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
@@ -174,7 +182,7 @@
   };
 
   xdg.portal.config.niri = {
-	"org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+    "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
   };
 
   nixpkgs.overlays = [
@@ -184,9 +192,12 @@
       };
     })
   ];
-  
+
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes"];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     extra-substituters = [
       "https://cache.garnix.io?priority=10"
       "https://vicinae.cachix.org?priority=20"
@@ -207,15 +218,15 @@
   };
 
   hardware = {
-      bluetooth = {
-            enable = true;
-            powerOnBoot = true;
-        };
-      graphics = {
-        enable = true;
-        enable32Bit = true;
-      };
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
     };
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+  };
 
   system.stateVersion = "26.05";
 }

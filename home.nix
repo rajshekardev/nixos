@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }: 
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   dotfiles = "${config.home.homeDirectory}/nixos/config";
@@ -13,98 +18,99 @@ let
 in
 
 {
-	home.username = "rshekar";
-	home.homeDirectory = "/home/rshekar";
-	home.stateVersion = "26.05";
+  home.username = "rshekar";
+  home.homeDirectory = "/home/rshekar";
+  home.stateVersion = "26.05";
 
-	programs = {
-		zsh = {
-		    enable = true;
-		    enableCompletion = true;
+  programs = {
+    zsh = {
+      enable = true;
+      enableCompletion = true;
 
-		    autosuggestion.enable = true;
-		    syntaxHighlighting.enable = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
 
-		    initContent = ''
-		      if [ -f ~/.nixdots/config/zsh/.zshrc ]; then
-			source ~/.nixdots/config/zsh/.zshrc
-		      fi
-		    '';
+      initContent = ''
+        		      if [ -f ~/.nixdots/config/zsh/.zshrc ]; then
+        			source ~/.nixdots/config/zsh/.zshrc
+        		      fi
+        		    '';
 
-		    shellAliases = {
-		      build-nix = "sudo nixos-rebuild switch --flake ~/.nixdots#nixos";
-		      arch = "distrobox enter arch";
-		      dots = "cd ~/.nixdots";
-		    };
-		};
-
-		git = {
-		  enable = true;
-		  settings = {
-			user = {
-			name = "Raj Shekar S";
-			email = "rajshekarwork@gmail.com";
-			};
-			init = {
-			defaultBranch = "main";
-			};
-		  };
-
-		};
-
-		gh.enable = true;
-		ghostty.enable = true;
-		fuzzel.enable = true;
-		swaylock.enable = true;
-		waybar.enable = true;
-		direnv = {
-		  enable = true;
-		  nix-direnv.enable = true;
-		};
-		starship = {
-		  enable = true;
-		  enableZshIntegration = true;
-		};
-	};
-
-	  xdg.configFile = builtins.mapAttrs (name: subpath: {
-	    source = create_symlink "${dotfiles}/${subpath}";
-	    recursive = true;
-	  }) configs;
-
-	services = {
-	  mako.enable = true;
-	  swayidle.enable = true;
-	  polkit-gnome.enable = true;
-    vicinae = {
-        enable = true;
-        systemd = {
-            enable = true;
-            autoStart = true;
-            environment = {
-              USE_LAYER_SHELL = 1;
-            };
-        };
+      shellAliases = {
+        build-nix = "sudo nixos-rebuild switch --flake ~/.nixdots#nixos";
+        arch = "distrobox enter arch";
+        dots = "cd ~/.nixdots";
+      };
     };
-	};
 
-	home.packages = with pkgs; [
-	  pfetch-rs
-	  fastfetch
-	  fzf
-	  zoxide
-	  ripgrep
-	  gcc
-	  nodejs
-	  cmatrix
-	  direnv
-	  nix-direnv
-	  waypaper
-	  swaybg
-	  awww
-	  gh
-	  xwayland-satellite
-	  inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-	];
+    git = {
+      enable = true;
+      settings = {
+        user = {
+          name = "Raj Shekar S";
+          email = "rajshekarwork@gmail.com";
+        };
+        init = {
+          defaultBranch = "main";
+        };
+      };
+
+    };
+
+    gh.enable = true;
+    ghostty.enable = true;
+    fuzzel.enable = true;
+    swaylock.enable = true;
+    waybar.enable = true;
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+    starship = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+  };
+
+  xdg.configFile = builtins.mapAttrs (name: subpath: {
+    source = create_symlink "${dotfiles}/${subpath}";
+    recursive = true;
+  }) configs;
+
+  services = {
+    mako.enable = true;
+    swayidle.enable = true;
+    polkit-gnome.enable = true;
+    vicinae = {
+      enable = true;
+      systemd = {
+        enable = true;
+        autoStart = true;
+        environment = {
+          USE_LAYER_SHELL = 1;
+        };
+      };
+    };
+  };
+
+  home.packages = with pkgs; [
+    pfetch-rs
+    fastfetch
+    fzf
+    zoxide
+    ripgrep
+    gcc
+    nodejs
+    cmatrix
+    rustup
+    direnv
+    nix-direnv
+    waypaper
+    swaybg
+    awww
+    gh
+    xwayland-satellite
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
 
 }
