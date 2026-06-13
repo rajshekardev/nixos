@@ -31,8 +31,8 @@ in
       syntaxHighlighting.enable = true;
 
       initContent = ''
-        		      if [ -f ~/.nixdots/config/zsh/.zshrc ]; then
-        			source ~/.nixdots/config/zsh/.zshrc
+        		      if [ -f ~/nixos/config/zsh/.zshrc ]; then
+        			source ~/nixos/config/zsh/.zshrc
         		      fi
         		    '';
 
