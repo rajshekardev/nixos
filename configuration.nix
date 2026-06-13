@@ -146,6 +146,7 @@
     udiskie
     bluetui
     vulkan-tools
+    pavucontrol
   ];
 
   environment.sessionVariables = {
