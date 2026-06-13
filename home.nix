@@ -1,5 +1,17 @@
 { config, pkgs, inputs, ... }: 
 
+let
+  dotfiles = "${config.home.homeDirectory}/.nixdots/config";
+  create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+  configs = {
+    niri = "niri";
+    nvim = "nvim";
+    ghostty = "ghostty";
+    swaylock = "swaylock";
+    "starship.toml" = "starship.toml";
+  };
+in
+
 {
 	home.username = "rshekar";
 	home.homeDirectory = "/home/rshekar";
@@ -7,10 +19,23 @@
 
 	programs = {
 		zsh = {
-		  enable = true;
-		  shellAliases = {
-		   hex = "echo from zsh";
-		  };
+		    enable = true;
+		    enableCompletion = true;
+
+		    autosuggestion.enable = true;
+		    syntaxHighlighting.enable = true;
+
+		    initContent = ''
+		      if [ -f ~/.nixdots/config/zsh/.zshrc ]; then
+			source ~/.nixdots/config/zsh/.zshrc
+		      fi
+		    '';
+
+		    shellAliases = {
+		      build-nix = "sudo nixos-rebuild switch --flake ~/.nixdots#nixos";
+		      arch = "distrobox enter arch";
+		      dots = "cd ~/.nixdots";
+		    };
 		};
 
 		git = {
@@ -25,13 +50,27 @@
 			init.defaultBranch = "main";
 		  };
 		};
-		
-		alacritty.enable = true;
+
+		gh.enable = true;
+		ghostty.enable = true;
 		fuzzel.enable = true;
 		swaylock.enable = true;
 		waybar.enable = true;
-
+		direnv = {
+		  enable = true;
+		  nix-direnv.enable = true;
+		};
+		starship = {
+		  enable = true;
+		  enableZshIntegration = true;
+		};
 	};
+
+	  xdg.configFile = builtins.mapAttrs (name: subpath: {
+	    source = create_symlink "${dotfiles}/${subpath}";
+	    recursive = true;
+	  }) configs;
+
 	services = {
 	  mako.enable = true;
 	  swayidle.enable = true;
@@ -39,6 +78,16 @@
 	};
 
 	home.packages = with pkgs; [
+	  pfetch-rs
+	  fastfetch
+	  fzf
+	  zoxide
+	  ripgrep
+	  gcc
+	  nodejs
+	  cmatrix
+	  direnv
+	  nix-direnv
 	  waypaper
 	  swaybg
 	  awww

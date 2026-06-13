@@ -1,0 +1,14 @@
+window-padding-x = 13
+window-padding-y = 13
+
+background-opacity = 0.8
+background-blur = true
+
+theme = Rose Pine
+
+font-family = JetBrainsMono Nerd Font
+font-size = 12
+
+keybind = ctrl+x=close_surface
+
+confirm-close-surface = false

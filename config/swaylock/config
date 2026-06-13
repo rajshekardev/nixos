@@ -1,0 +1,12 @@
+image=/home/rshekar/Pictures/wall/2675673.jpg
+ignore-empty-password
+scaling=center
+hide-keyboard-layout
+indicator-caps-lock
+color=#00000022
+ring-color=#00000011
+indicator-radius=60
+inside-color=#00000000
+key-hl-color=#ffffff44
+line-ver-color=#33333333
+

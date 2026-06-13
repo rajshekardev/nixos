@@ -1,0 +1,3 @@
+timeout 30 'swaylock'
+timeout 60 'swaymsg "output * power off"'
+before-sleep 'swaylock'
