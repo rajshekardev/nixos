@@ -42,8 +42,6 @@
   };
   services.displayManager.ly.enable = true;
 
-  systemd.user.services.niri.enableDefaultPath = false;
-
   systemd.user.services = {
     niri.enableDefaultPath = false;
     polkit-gnome-authentication-agent-1 = {
