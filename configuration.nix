@@ -155,6 +155,7 @@
     bluetui
     vulkan-tools
     pavucontrol
+    blender
   ];
 
   environment.sessionVariables = {
