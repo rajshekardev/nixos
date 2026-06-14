@@ -112,6 +112,7 @@ in
     xwayland-satellite
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     btop
+    brightnessctl
   ];
 
 }
