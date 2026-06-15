@@ -18,7 +18,6 @@
     kernelModules = [
       "ip_tables"
       "iptable_nat"
-      "uinput"
     ];
   };
 
@@ -74,8 +73,6 @@
     udisks2.enable = true;
     blueman.enable = true;
 
-    dbus.enable = true;
-
   };
 
   systemd.user.services = {
@@ -102,30 +99,8 @@
     zsh.enable = true;
     kdeconnect.enable = true;
     gamemode.enable = true;
-
-    nix-ld = {
-      enable = true;
-      libraries = with pkgs; [
-        stdenv.cc.cc
-        zlib
-        fuse3
-        alsa-lib
-        libGL
-        libX11
-        libXi
-        libXtst
-        libXrandr
-        libXcursor
-        libXcomposite
-        libXdamage
-        libXext
-        libXfixes
-        libXrender
-        libXt
-        openssl
-        glib
-      ];
-    };
+    xppen.enable = true;
+    xppen.package = pkgs.xppen_4;
   };
 
   security = {
@@ -160,7 +135,6 @@
       "networkmanager"
       "wheel"
       "kvm"
-      "input"
     ];
 
     packages = with pkgs; [
@@ -188,10 +162,6 @@
     android-studio
     statix
     steam
-    xppen_4
-    gtk3
-    glib
-    libnotify
   ];
 
   environment.sessionVariables = {
@@ -266,7 +236,6 @@
       enable = true;
       enable32Bit = true;
     };
-    uinput.enable = true;
   };
 
   system.stateVersion = "26.05";
