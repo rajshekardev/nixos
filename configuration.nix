@@ -72,7 +72,6 @@
     niri.enable = true;
     zsh.enable = true;
     kdeconnect.enable = true;
-    xppen.enable = true;
     gamemode.enable = true;
 
     nix-ld = {
@@ -145,6 +144,7 @@
 
   environment.systemPackages = with pkgs; [
     curl
+    xppen_4
     unzip
     neovim
     ghostty
@@ -160,6 +160,7 @@
     blender
     android-tools
     android-studio
+    statix
   ];
 
   environment.sessionVariables = {
