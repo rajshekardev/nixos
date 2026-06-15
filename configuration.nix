@@ -100,7 +100,7 @@
     zsh.enable = true;
     kdeconnect.enable = true;
     gamemode.enable = true;
-    xppen.package = pkgs.xppen_4;
+    xppen.enable = true;
 
     nix-ld = {
       enable = true;
@@ -170,6 +170,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    xppen_4
     curl
     unzip
     neovim
