@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   ...
@@ -9,42 +8,73 @@
   imports = [
     ./hardware-configuration.nix
   ];
+  boot = {
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
+
+    kernelModules = [
+      "ip_tables"
+      "iptable_nat"
+    ];
+  };
 
   networking.hostName = "nixos"; # Define your hostname.
 
   networking.networkmanager.enable = true;
 
   time.timeZone = "Asia/Kolkata";
+  i18n = {
 
-  i18n.defaultLocale = "en_US.UTF-8";
+    defaultLocale = "en_US.UTF-8";
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
 
-  services.xserver = {
-    enable = true;
-    autoRepeatDelay = 200;
-    autoRepeatInterval = 35;
-    xkb = {
-      layout = "us";
-      variant = "";
+    inputMethod = {
+      enable = true;
+      type = "ibus";
+      ibus.engines = with pkgs.ibus-engines; [
+        m17n
+      ];
     };
   };
-  services.displayManager.ly.enable = true;
+  services = {
+
+    xserver = {
+      enable = true;
+      autoRepeatDelay = 200;
+      autoRepeatInterval = 35;
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+    };
+
+    displayManager.ly.enable = true;
+
+    gnome.gnome-keyring.enable = true;
+    power-profiles-daemon.enable = true;
+    logind.settings.Login = {
+      HandleLidSwitch = "ignore";
+    };
+
+    gvfs.enable = true;
+    udisks2.enable = true;
+    blueman.enable = true;
+
+  };
 
   systemd.user.services = {
     niri.enableDefaultPath = false;
@@ -62,9 +92,6 @@
       };
     };
   };
-
-  virtualisation.waydroid.enable = true;
-  virtualisation.waydroid.package = pkgs.waydroid-nftables;
 
   powerManagement.cpuFreqGovernor = "performance";
 
@@ -103,26 +130,27 @@
     polkit.enable = true;
     pam.services.swaylock = { };
   };
+  nixpkgs = {
 
-  services = {
-    gnome.gnome-keyring.enable = true;
-    power-profiles-daemon.enable = true;
-    logind.settings.Login = {
-      HandleLidSwitch = "ignore";
-    };
-    gvfs.enable = true;
-    udisks2.enable = true;
-    blueman.enable = true;
-  };
+    config.allowUnfreePredicate =
+      pkg:
+      builtins.elem (lib.getName pkg) [
+        "google-chrome"
+        "obsidian"
+        "steam"
+        "steam-unwrapped"
+      ];
 
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "google-chrome"
-      "obsidian"
-      "steam"
-      "steam-unwrapped"
+    config.allowUnfree = true;
+
+    overlays = [
+      (final: prev: {
+        steam = prev.steam.override {
+          extraArgs = "-cef-disable-gpu-compositing";
+        };
+      })
     ];
+  };
 
   users.users."rshekar" = {
     isNormalUser = true;
@@ -140,11 +168,8 @@
     ];
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   environment.systemPackages = with pkgs; [
     curl
-    xppen_4
     unzip
     neovim
     ghostty
@@ -167,16 +192,16 @@
     NIXOS_OZONE_WL = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "x11";
   };
+  virtualisation = {
 
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
+    waydroid.enable = true;
+    waydroid.package = pkgs.waydroid-nftables;
+
+    podman = {
+      enable = true;
+      dockerCompat = true;
+    };
   };
-
-  boot.kernelModules = [
-    "ip_tables"
-    "iptable_nat"
-  ];
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -186,14 +211,6 @@
     google-fonts
   ];
 
-  i18n.inputMethod = {
-    enable = true;
-    type = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [
-      m17n
-    ];
-  };
-
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
@@ -202,14 +219,6 @@
   xdg.portal.config.niri = {
     "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
   };
-
-  nixpkgs.overlays = [
-    (final: prev: {
-      steam = prev.steam.override {
-        extraArgs = "-cef-disable-gpu-compositing";
-      };
-    })
-  ];
 
   nix.settings = {
     experimental-features = [
@@ -243,6 +252,9 @@
     graphics = {
       enable = true;
       enable32Bit = true;
+    };
+    opentabletdriver = {
+      enable = true;
     };
   };
 
