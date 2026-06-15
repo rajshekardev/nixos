@@ -100,6 +100,7 @@
     zsh.enable = true;
     kdeconnect.enable = true;
     gamemode.enable = true;
+    xppen.package = pkgs.xppen_4;
 
     nix-ld = {
       enable = true;
@@ -252,9 +253,6 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-    };
-    opentabletdriver = {
-      enable = true;
     };
   };
 
