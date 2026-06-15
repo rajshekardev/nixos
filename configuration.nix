@@ -74,6 +74,7 @@
     kdeconnect.enable = true;
     xppen.enable = true;
     gamemode.enable = true;
+
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
@@ -133,6 +134,7 @@
       "wheel"
       "kvm"
     ];
+
     packages = with pkgs; [
       tree
       zsh
@@ -156,6 +158,8 @@
     vulkan-tools
     pavucontrol
     blender
+    android-tools
+    android-studio
   ];
 
   environment.sessionVariables = {
