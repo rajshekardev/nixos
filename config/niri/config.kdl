@@ -19,6 +19,10 @@ input {
  
     }
 
+    tablet {
+      map-to-output "HDMI-A-1"
+    }
+
     warp-mouse-to-focus
 
     focus-follows-mouse max-scroll-amount="0%"

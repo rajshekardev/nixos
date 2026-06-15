@@ -18,10 +18,11 @@
     kernelModules = [
       "ip_tables"
       "iptable_nat"
+      "uinput"
     ];
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos";
 
   networking.networkmanager.enable = true;
 
@@ -51,7 +52,6 @@
     };
   };
   services = {
-
     xserver = {
       enable = true;
       autoRepeatDelay = 200;
@@ -73,6 +73,8 @@
     gvfs.enable = true;
     udisks2.enable = true;
     blueman.enable = true;
+
+    dbus.enable = true;
 
   };
 
@@ -100,7 +102,6 @@
     zsh.enable = true;
     kdeconnect.enable = true;
     gamemode.enable = true;
-    xppen.enable = true;
 
     nix-ld = {
       enable = true;
@@ -131,13 +132,11 @@
     polkit.enable = true;
     pam.services.swaylock = { };
   };
-  nixpkgs = {
 
+  nixpkgs = {
     config.allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [
-        "google-chrome"
-        "obsidian"
         "steam"
         "steam-unwrapped"
       ];
@@ -161,6 +160,7 @@
       "networkmanager"
       "wheel"
       "kvm"
+      "input"
     ];
 
     packages = with pkgs; [
@@ -170,7 +170,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    xppen_4
     curl
     unzip
     neovim
@@ -188,12 +187,22 @@
     android-tools
     android-studio
     statix
+    steam
+    xppen_4
+    gtk3
+    glib
+    libnotify
   ];
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-    ELECTRON_OZONE_PLATFORM_HINT = "x11";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+
     QT_QPA_PLATFORM = "wayland;xcb";
+
+    GTK_IM_MODULE = "ibus";
+    QT_IM_MODULE = "ibus";
+    XMODIFIERS = "@im=ibus";
   };
 
   virtualisation = {
@@ -257,6 +266,7 @@
       enable = true;
       enable32Bit = true;
     };
+    uinput.enable = true;
   };
 
   system.stateVersion = "26.05";
