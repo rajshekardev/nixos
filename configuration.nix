@@ -101,6 +101,18 @@
     gamemode.enable = true;
     xppen.enable = true;
     xppen.package = pkgs.xppen_4;
+
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc
+        zlib
+        glib
+        openssl
+        icu
+        libgcc
+      ];
+    };
   };
 
   security = {
