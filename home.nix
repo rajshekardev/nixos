@@ -18,9 +18,33 @@ let
 in
 
 {
-  home.username = "rshekar";
-  home.homeDirectory = "/home/rshekar";
-  home.stateVersion = "26.05";
+  home = {
+    username = "rshekar";
+    homeDirectory = "/home/rshekar";
+    stateVersion = "26.05";
+
+    packages = with pkgs; [
+      pfetch-rs
+      fastfetch
+      fzf
+      zoxide
+      ripgrep
+      gcc
+      nodejs
+      cmatrix
+      rustup
+      direnv
+      nix-direnv
+      waypaper
+      swaybg
+      awww
+      gh
+      xwayland-satellite
+      inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+      btop
+      brightnessctl
+    ];
+  };
 
   programs = {
     zsh = {
@@ -32,9 +56,9 @@ in
 
       initContent = ''
               if [ -f ~/nixos/config/zsh/.zshrc ]; then
-        			source ~/nixos/config/zsh/.zshrc
-        		      fi
-        		    '';
+                source ~/nixos/config/zsh/.zshrc
+              fi
+        	    '';
 
       shellAliases = {
         build-nix = "sudo nixos-rebuild switch --flake ~/nixos#nixos";
@@ -91,27 +115,5 @@ in
       };
     };
   };
-
-  home.packages = with pkgs; [
-    pfetch-rs
-    fastfetch
-    fzf
-    zoxide
-    ripgrep
-    gcc
-    nodejs
-    cmatrix
-    rustup
-    direnv
-    nix-direnv
-    waypaper
-    swaybg
-    awww
-    gh
-    xwayland-satellite
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    btop
-    brightnessctl
-  ];
 
 }
