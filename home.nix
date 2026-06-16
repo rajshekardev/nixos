@@ -31,7 +31,7 @@ in
       syntaxHighlighting.enable = true;
 
       initContent = ''
-        		      if [ -f ~/nixos/config/zsh/.zshrc ]; then
+              if [ -f ~/nixos/config/zsh/.zshrc ]; then
         			source ~/nixos/config/zsh/.zshrc
         		      fi
         		    '';
@@ -54,7 +54,6 @@ in
           defaultBranch = "main";
         };
       };
-
     };
 
     gh.enable = true;
