@@ -44,6 +44,7 @@ in
       btop
       brightnessctl
       zed-editor
+      bun
     ];
   };
 
