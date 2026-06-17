@@ -45,6 +45,7 @@ in
       brightnessctl
       zed-editor
       bun
+      obsidian
     ];
   };
 
