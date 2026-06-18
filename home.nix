@@ -46,6 +46,7 @@ in
       zed-editor
       bun
       obsidian
+      chromium
     ];
   };
 
@@ -102,6 +103,32 @@ in
     source = create_symlink "${dotfiles}/${subpath}";
     recursive = true;
   }) configs;
+
+  ## Web Apps
+  # Notion
+  home.file.".local/share/applications/notion.desktop".text = ''
+    [Desktop Entry]
+    Version=1.0
+    Type=Application
+    Name=Notion
+    Comment=Open Notion as a Web App
+    Exec=chromium --app="https://notion.so" --new-window --ozone-platform=wayland
+    Icon=notion
+    Terminal=false
+    Categories=Network;WebBrowser;
+  '';
+
+  home.file.".local/share/applications/whatsapp.desktop".text = ''
+    [Desktop Entry]
+    Version=1.0
+    Type=Application
+    Name=WhatsApp
+    Comment=Open WhatsApp Web as a Web App
+    Exec=chromium --app="https://web.whatsapp.com" --new-window --ozone-platform=wayland
+    Icon=whatsapp
+    Terminal=false
+    Categories=Network;WebBrowser;
+  '';
 
   services = {
     mako.enable = true;
