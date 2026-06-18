@@ -130,6 +130,19 @@ in
     Categories=Network;WebBrowser;
   '';
 
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+  };
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+
   services = {
     mako.enable = true;
     swayidle.enable = true;
