@@ -47,6 +47,7 @@ in
       bun
       obsidian
       chromium
+      graphite
     ];
   };
 
