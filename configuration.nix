@@ -63,17 +63,18 @@
 
     pulseaudio.enable = false;
     pipewire = {
-	enable = true;
-	alsa.enable = true;
-	alsa.support32Bit = true;
-	pulse.enable = true;
-	jack.enable = true;
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = true;
     };
 
     displayManager.ly.enable = true;
 
     gnome.gnome-keyring.enable = true;
     power-profiles-daemon.enable = true;
+    upower.enable = true;
     logind.settings.Login = {
       HandleLidSwitch = "ignore";
     };
