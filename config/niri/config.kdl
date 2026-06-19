@@ -85,6 +85,7 @@ spawn-at-startup "waypaper --restore"
 spawn-at-startup "vicinae" "server"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "udiskie"
+spawn-at-startup "noctalia-shell"
 
 prefer-no-csd
 

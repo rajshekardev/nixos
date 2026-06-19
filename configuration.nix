@@ -73,6 +73,7 @@
     displayManager.ly.enable = true;
 
     gnome.gnome-keyring.enable = true;
+    gnome.evolution-data-server.enable = true;
     power-profiles-daemon.enable = true;
     upower.enable = true;
     logind.settings.Login = {
@@ -228,8 +229,14 @@
       "nix-command"
       "flakes"
     ];
-    extra-substituters = [ "https://vicinae.cachix.org" ];
-    extra-trusted-public-keys = [ "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" ];
+    extra-substituters = [ 
+      "https://vicinae.cachix.org" 
+      "https://noctalia.cachix.org"
+    ];
+    extra-trusted-public-keys = [ 
+      "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    ];
 
     connect-timeout = 10;
     download-attempts = 5;
