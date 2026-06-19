@@ -47,7 +47,8 @@ in
       bun
       obsidian
       chromium
-      graphite
+      nil
+      krita
     ];
   };
 

@@ -172,7 +172,6 @@
     ghostty
     distrobox
     power-profiles-daemon
-    hydralauncher
     wl-clipboard
     nautilus
     udiskie
@@ -180,8 +179,6 @@
     vulkan-tools
     pavucontrol
     blender
-    android-tools
-    android-studio
     statix
     steam
   ];
@@ -230,14 +227,9 @@
       "nix-command"
       "flakes"
     ];
-    extra-substituters = [
-      "https://cache.garnix.io?priority=10"
-      "https://vicinae.cachix.org?priority=20"
-    ];
-    extra-trusted-public-keys = [
-      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-      "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
-    ];
+    extra-substituters = [ "https://vicinae.cachix.org" ];
+    extra-trusted-public-keys = [ "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" ];
+
     connect-timeout = 10;
     download-attempts = 5;
     fallback = true;
