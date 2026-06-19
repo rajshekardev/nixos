@@ -61,6 +61,16 @@
       };
     };
 
+    pulseaudio.enable = false;
+    rtkit.enable = true;
+    pipewire = {
+	enable = true;
+	alsa.enable = true;
+	also.support32Bit = true;
+	pulse.enable = true;
+	jack.enable = true;
+    };
+
     displayManager.ly.enable = true;
 
     gnome.gnome-keyring.enable = true;
