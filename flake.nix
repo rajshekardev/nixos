@@ -12,10 +12,6 @@
           inputs.nixpkgs.follows = "nixpkgs";
         };
       vicinae.url = "github:vicinaehq/vicinae";
-      noctalia = {
-        url = "github:noctalia-dev/noctalia/legacy-v4";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
     };
 
     outputs = { self, nixpkgs, home-manager, vicinae, ... }@inputs: {
@@ -24,7 +20,6 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./configuration.nix
-          ./noctalia.nix
           vicinae.nixosModules.default
           home-manager.nixosModules.home-manager 
             {
