@@ -62,7 +62,6 @@
     };
 
     pulseaudio.enable = false;
-    rtkit.enable = true;
     pipewire = {
 	enable = true;
 	alsa.enable = true;
@@ -127,6 +126,7 @@
 
   security = {
     polkit.enable = true;
+    rtkit.enable = true;
     pam.services.swaylock = { };
   };
 
