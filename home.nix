@@ -49,6 +49,7 @@ in
       chromium
       nil
       krita
+      unzip
     ];
   };
 
