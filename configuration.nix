@@ -45,9 +45,6 @@
     inputMethod = {
       enable = true;
       type = "ibus";
-      ibus.engines = with pkgs.ibus-engines; [
-        m17n
-      ];
     };
   };
   services = {
@@ -191,9 +188,10 @@
 
     QT_QPA_PLATFORM = "wayland;xcb";
 
-    GTK_IM_MODULE = "ibus";
-    QT_IM_MODULE = "ibus";
     XMODIFIERS = "@im=ibus";
+
+    GTK_IM_MODULE = lib.mkForce null;
+    QT_IM_MODULE = lib.mkForce null;
   };
 
   virtualisation = {
