@@ -71,7 +71,7 @@
         "d /var/cache/shared-wallpaper 0755 raj users -"
       ];
 
-    services.displayManager.plasma-login-manager = {
+    displayManager.plasma-login-manager = {
       enable = true;
       settings = {
         "Greeter][Wallpaper][org.kde.image][General" = {
