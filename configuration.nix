@@ -195,6 +195,19 @@ environment = {
     statix
     steam
     nixpkgs-fmt
+    nixfmt
+    dart
+    viu
+    chafa
+    ueberzugpp
+    lua51Packages.luarocksMoveDataFolder
+    python3
+    fd
+    lazygit
+    wget
+    go
+    imagemagick
+    dart
   ];
 
   sessionVariables = {
