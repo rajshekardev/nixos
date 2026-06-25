@@ -49,7 +49,7 @@
   };
 
   systemd.tmpfiles.rules = [
-    "d /var/cache/shared-wallpaper 0755 raj users -"
+    "d /var/cache/shared-wallpaper 0755 rshekar users -"
   ];
 
   services = {
