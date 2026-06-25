@@ -47,6 +47,11 @@
       type = "ibus";
     };
   };
+
+  systemd.tmpfiles.rules = [
+    "d /var/cache/shared-wallpaper 0755 raj users -"
+  ];
+
   services = {
     xserver = {
       enable = true;
@@ -67,9 +72,7 @@
       jack.enable = true;
     };
 
-    systemd.tmpfiles.rules = [
-        "d /var/cache/shared-wallpaper 0755 raj users -"
-      ];
+
 
     displayManager.plasma-login-manager = {
       enable = true;
