@@ -14,6 +14,7 @@ let
     ghostty = "ghostty";
     swaylock = "swaylock";
     "starship.toml" = "starship.toml";
+    waypaper = "waypaper";
   };
 in
 
