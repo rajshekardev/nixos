@@ -180,6 +180,7 @@
     blender
     statix
     steam
+    nixpkgs-fmt
   ];
 
   environment.sessionVariables = {
@@ -227,14 +228,8 @@
       "nix-command"
       "flakes"
     ];
-    extra-substituters = [ 
-      "https://vicinae.cachix.org" 
-      "https://noctalia.cachix.org"
-    ];
-    extra-trusted-public-keys = [ 
-      "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
-      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
-    ];
+    extra-substituters = [ "https://vicinae.cachix.org" ];
+    extra-trusted-public-keys = [ "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" ];
 
     connect-timeout = 10;
     download-attempts = 5;
