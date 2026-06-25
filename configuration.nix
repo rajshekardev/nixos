@@ -67,8 +67,18 @@
       jack.enable = true;
     };
 
-    displayManager.ly.enable = true;
+    systemd.tmpfiles.rules = [
+        "d /var/cache/shared-wallpaper 0755 raj users -"
+      ];
 
+    services.displayManager.plasma-login-manager = {
+      enable = true;
+      settings = {
+        "Greeter][Wallpaper][org.kde.image][General" = {
+          Image = "file:///var/cache/shared-wallpaper/current.jpg";
+        };
+      };
+    };
     gnome.gnome-keyring.enable = true;
     gnome.evolution-data-server.enable = true;
     power-profiles-daemon.enable = true;
