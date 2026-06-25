@@ -45,7 +45,6 @@ in
       brightnessctl
       zed-editor
       bun
-      obsidian
       chromium
       nil
       krita
