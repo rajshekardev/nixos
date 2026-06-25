@@ -76,11 +76,6 @@
 
     displayManager.plasma-login-manager = {
       enable = true;
-      settings = {
-        "Greeter][Wallpaper][org.kde.image][General" = {
-          Image = "file:///var/cache/shared-wallpaper/current.jpg";
-        };
-      };
     };
     gnome.gnome-keyring.enable = true;
     gnome.evolution-data-server.enable = true;
@@ -176,8 +171,14 @@
       zsh
     ];
   };
+environment = {
 
-  environment.systemPackages = with pkgs; [
+  etc."plasmalogin.conf".text = ''
+    [Greeter][Wallpaper][org.kde.image][General]
+    Image=file:///var/cache/shared-wallpaper/current.jpg
+  '';
+
+  systemPackages = with pkgs; [
     curl
     unzip
     neovim
@@ -196,12 +197,13 @@
     nixpkgs-fmt
   ];
 
-  environment.sessionVariables = {
+  sessionVariables = {
     NIXOS_OZONE_WL = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     QT_QPA_PLATFORM = "wayland;xcb";
     XMODIFIERS = "@im=ibus";
   };
+};
 
   virtualisation = {
 
