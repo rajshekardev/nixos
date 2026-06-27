@@ -112,6 +112,7 @@ window-rule {
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
+    Mod+Shift+S hotkey-overlay-title="Shutdown System" { spawn "systemctl" "poweroff";}
     Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+Space repeat=false { spawn "vicinae" "toggle"; } 

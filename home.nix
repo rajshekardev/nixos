@@ -101,15 +101,15 @@ in
       enableZshIntegration = true;
     };
     vicinae = {
-    enable = true;
-    systemd = {
       enable = true;
-      autoStart = true;
-      environment = {
-        USE_LAYER_SHELL = 1;
+      systemd = {
+        enable = true;
+        autoStart = true;
+        environment = {
+          USE_LAYER_SHELL = 1;
+        };
       };
     };
-  };
   };
 
   xdg.configFile = builtins.mapAttrs (name: subpath: {
