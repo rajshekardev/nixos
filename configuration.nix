@@ -17,7 +17,7 @@
       extraEntries = ''
         /Windows 11
         protocol: efi
-        path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
+        image_path: uuid(62C3-7700):/EFI/Microsoft/Boot/bootmgfw.efi
       '';
     };
 
