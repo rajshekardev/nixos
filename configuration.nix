@@ -10,8 +10,18 @@
   ];
   boot = {
 
-    loader.systemd-boot.enable = true;
+    loader.systemd-boot.enable = false;
     loader.efi.canTouchEfiVariables = true;
+    loader.limine = {
+	enable = true;
+	enrollConfig = true;
+	maxGenerations = 10;
+	extraEntries = ''
+	  /Windows 11
+	  protocol: efi
+	  path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
+	'';
+    };
 
     kernelPackages = pkgs.linuxPackages_latest;
 
@@ -180,6 +190,7 @@ environment = {
 
   systemPackages = with pkgs; [
     curl
+    limine
     unzip
     neovim
     ghostty
