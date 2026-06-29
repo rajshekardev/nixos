@@ -9,18 +9,16 @@
     ./hardware-configuration.nix
   ];
   boot = {
-
-    loader.systemd-boot.enable = false;
     loader.efi.canTouchEfiVariables = true;
     loader.limine = {
-	enable = true;
-	enrollConfig = true;
-	maxGenerations = 10;
-	extraEntries = ''
-	  /Windows 11
-	  protocol: efi
-	  path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
-	'';
+      enable = true;
+      enrollConfig = true;
+      maxGenerations = 10;
+      extraEntries = ''
+        /Windows 11
+        protocol: efi
+        path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
+      '';
     };
 
     kernelPackages = pkgs.linuxPackages_latest;
@@ -81,8 +79,6 @@
       pulse.enable = true;
       jack.enable = true;
     };
-
-
 
     displayManager.plasma-login-manager = {
       enable = true;
@@ -181,53 +177,53 @@
       zsh
     ];
   };
-environment = {
+  environment = {
 
-  etc."plasmalogin.conf".text = ''
-    [Greeter][Wallpaper][org.kde.image][General]
-    Image=file:///var/cache/shared-wallpaper/current.jpg
-  '';
+    etc."plasmalogin.conf".text = ''
+      [Greeter][Wallpaper][org.kde.image][General]
+      Image=file:///var/cache/shared-wallpaper/current.jpg
+    '';
 
-  systemPackages = with pkgs; [
-    curl
-    limine
-    unzip
-    neovim
-    ghostty
-    distrobox
-    power-profiles-daemon
-    wl-clipboard
-    nautilus
-    udiskie
-    bluetui
-    vulkan-tools
-    pavucontrol
-    blender
-    statix
-    steam
-    nixpkgs-fmt
-    nixfmt
-    dart
-    viu
-    chafa
-    ueberzugpp
-    lua51Packages.luarocksMoveDataFolder
-    python3
-    fd
-    lazygit
-    wget
-    go
-    imagemagick
-    dart
-  ];
+    systemPackages = with pkgs; [
+      curl
+      limine
+      unzip
+      neovim
+      ghostty
+      distrobox
+      power-profiles-daemon
+      wl-clipboard
+      nautilus
+      udiskie
+      bluetui
+      vulkan-tools
+      pavucontrol
+      blender
+      statix
+      steam
+      nixpkgs-fmt
+      nixfmt
+      dart
+      viu
+      chafa
+      ueberzugpp
+      lua51Packages.luarocksMoveDataFolder
+      python3
+      fd
+      lazygit
+      wget
+      go
+      imagemagick
+      dart
+    ];
 
-  sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    ELECTRON_OZONE_PLATFORM_HINT = "auto";
-    QT_QPA_PLATFORM = "wayland;xcb";
-    XMODIFIERS = "@im=ibus";
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+      ELECTRON_OZONE_PLATFORM_HINT = "auto";
+      QT_QPA_PLATFORM = "wayland;xcb";
+      XMODIFIERS = "@im=ibus";
+    };
   };
-};
 
   virtualisation = {
 
