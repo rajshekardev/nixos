@@ -16,7 +16,7 @@
       maxGenerations = 10;
       extraEntries = ''
         /Windows 11
-        protocol: efi
+        protocol: efi_chainload
         image_path: uuid(62C3-7700):/EFI/Microsoft/Boot/bootmgfw.efi
       '';
     };
